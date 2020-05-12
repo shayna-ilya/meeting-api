@@ -5,5 +5,5 @@ export const MessageSchema = new mongoose.Schema({
   latitude: Number,
   longitude: Number,
   email: String,
-  created_at: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now },
 });

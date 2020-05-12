@@ -5,5 +5,5 @@ export interface Message extends Document {
   readonly message: string;
   readonly latitude: number;
   readonly longitude: number;
-  readonly created_at: Date;
+  readonly createdAt: Date;
 }
