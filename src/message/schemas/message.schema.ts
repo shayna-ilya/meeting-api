@@ -5,5 +5,7 @@ export const MessageSchema = new mongoose.Schema({
   latitude: Number,
   longitude: Number,
   email: String,
+  userName: String,
+  likes: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
 });
