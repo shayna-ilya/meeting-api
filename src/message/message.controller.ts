@@ -7,11 +7,13 @@ import {
   NotFoundException,
   Param,
   Post,
+  Put,
   Query,
   Res,
 } from '@nestjs/common';
 import { MessageService } from './message.service';
 import { AddMessageDTO } from './dto/add-message.dto';
+import { LikeDTO } from './dto/like.dto';
 
 @Controller('message')
 export class MessageController {
@@ -20,6 +22,12 @@ export class MessageController {
   @Post('/add')
   async addMessage(@Res() res, @Body() addMessageDTO: AddMessageDTO) {
     const message = await this.messageService.addMessage(addMessageDTO);
+    return res.status(HttpStatus.OK).json(message);
+  }
+
+  @Put('/like')
+  async addLike(@Res() res, @Body() likeDTO: LikeDTO) {
+    const message = await this.messageService.addLike(likeDTO);
     return res.status(HttpStatus.OK).json(message);
   }
 

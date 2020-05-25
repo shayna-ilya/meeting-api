@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Message } from './interfaces/message.interface';
 import { AddMessageDTO } from './dto/add-message.dto';
+import { LikeDTO } from './dto/like.dto';
 
 @Injectable()
 export class MessageService {
@@ -18,13 +19,16 @@ export class MessageService {
     return await this.messageModel.findById(id).exec();
   }
 
-  async addLike(id): Promise<Message> {
+  async addLike({ id }: LikeDTO): Promise<Message> {
     const updatedMessage = await this.getMessage(id);
     if (updatedMessage.likes) {
       updatedMessage.likes = updatedMessage.likes + 1;
     } else {
       updatedMessage.likes = 1;
     }
+    await this.messageModel.findByIdAndUpdate(id, updatedMessage, {
+      new: true,
+    });
     return updatedMessage;
   }
 
