@@ -39,8 +39,13 @@ export class MessageController {
 
   @Get('messages/my')
   async getMyMessages(@Res() res, @Query('email') email) {
-    console.log('email', email);
     const messages = await this.messageService.getMyMessages(email);
+    return res.status(HttpStatus.OK).json(messages);
+  }
+
+  @Get('messages/popular')
+  async getPopularMessages(@Res() res) {
+    const messages = await this.messageService.getPopularMessages();
     return res.status(HttpStatus.OK).json(messages);
   }
 

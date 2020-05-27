@@ -15,6 +15,14 @@ export class MessageService {
     return await this.messageModel.find().exec();
   }
 
+  async getPopularMessages(): Promise<Message[]> {
+    return await this.messageModel
+      .find()
+      .sort({ likes: -1 })
+      .limit(100)
+      .exec();
+  }
+
   async getMyMessages(email?: string): Promise<Message[]> {
     if (!email) {
       return [];
