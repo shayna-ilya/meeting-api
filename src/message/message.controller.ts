@@ -37,6 +37,13 @@ export class MessageController {
     return res.status(HttpStatus.OK).json(messages);
   }
 
+  @Get('messages/my')
+  async getMyMessages(@Res() res, @Query('email') email) {
+    console.log('email', email);
+    const messages = await this.messageService.getMyMessages(email);
+    return res.status(HttpStatus.OK).json(messages);
+  }
+
   @Get('message/:messageID')
   async getMessage(@Res() res, @Param('messageID') messageID) {
     const message = await this.messageService.getMessage(messageID);

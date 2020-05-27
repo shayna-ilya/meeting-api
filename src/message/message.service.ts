@@ -15,6 +15,13 @@ export class MessageService {
     return await this.messageModel.find().exec();
   }
 
+  async getMyMessages(email?: string): Promise<Message[]> {
+    if (!email) {
+      return [];
+    }
+    return await this.messageModel.find({ email: email }).exec();
+  }
+
   async getMessage(id): Promise<Message> {
     return await this.messageModel.findById(id).exec();
   }
